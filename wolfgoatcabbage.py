@@ -1,3 +1,4 @@
+# Chukwudi Ikem
 # For testing locally!
 # Making the directory in aima-python available to reference
 import sys
@@ -19,9 +20,16 @@ class WolfGoatCabbage(Problem):
     def goal_test(self, state):
         return state == self.goal
 
+    def result(self, state, action):
+        return super().result(state, action)
+
     def actions(self, state):
         if state == {"F", "W", "G", "C"}:
             return [{"F", "G"}]
+        elif state == {"W", "C"}:
+            return [{"F", "G"}, {"F"}]
+        elif state == {"F", "W", "C"}:
+            return [{"F", "C"}, {"F", "W"}, {"F"}]
 
 
 if __name__ == "__main__":
