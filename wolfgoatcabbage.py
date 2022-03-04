@@ -1,4 +1,6 @@
 # Chukwudi Ikem
+# TODO: Sititng at 15/25. So far everything has been brute force | take break | continue later tonight.
+
 # For testing locally!
 # Making the directory in aima-python available to reference
 import sys
