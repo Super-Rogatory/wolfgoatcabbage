@@ -1,5 +1,3 @@
-# For testing locally!
-
 from search import *
 
 # YOUR CODE GOES HERE
