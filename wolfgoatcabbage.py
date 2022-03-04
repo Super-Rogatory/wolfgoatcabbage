@@ -21,7 +21,10 @@ class WolfGoatCabbage(Problem):
         return state == self.goal
 
     def result(self, state, action):
-        return super().result(state, action)
+        if state == {"F", "W", "G", "C"} and action == {"F", "G"}:
+            return {"W", "C"}
+        elif state == {"W"} and action == {"F", "C"}:
+            return {"F", "W", "C"}
 
     def actions(self, state):
         if state == {"F", "W", "G", "C"}:
