@@ -15,7 +15,7 @@ from search import *
 
 # YOUR CODE GOES HERE
 class WolfGoatCabbage(Problem):
-    def __init__(self, initial={"F", "W", "G", "C"}, goal=frozenset()):
+    def __init__(self, initial=frozenset({"F", "W", "G", "C"}), goal=frozenset()):
         # Similar to EightPuzzle, we can define the initial and goal states for our problem.
         super().__init__(initial, goal)
 
@@ -23,10 +23,19 @@ class WolfGoatCabbage(Problem):
         return state == self.goal
 
     def result(self, state, action):
-        if state == {"F", "W", "G", "C"} and action == {"F", "G"}:
-            return {"W", "C"}
-        elif state == {"W"} and action == {"F", "C"}:
-            return {"F", "W", "C"}
+        new_result = set(state)
+        # TODO: fix result function.
+        # possible_actions = [{"F"}, {"F", "C"}, {"F", "G"}, {"F", "W"}]
+        if action == "F":
+            new_result.add("F")
+        elif action == {"F", "C"}:
+            return 0
+        elif action == {"F", "G"}:
+            return 0
+        elif action == {"F", "W"}:
+            return 0
+
+        return frozenset(new_result)
 
     def actions(self, state):
         # mirroring possible_actions list from eight_sliding_puzzle. acknowledge bidrectional potential.
@@ -53,8 +62,7 @@ class WolfGoatCabbage(Problem):
 
 if __name__ == "__main__":
     wgc = WolfGoatCabbage()
-    # solution = depth_first_graph_search(wgc).solution()
-    # print(solution)
-    # solution = breadth_first_graph_search(wgc).solution()
-    # print(solution)
-    print(wgc.actions())
+    solution = depth_first_graph_search(wgc).solution()
+    print(solution)
+    solution = breadth_first_graph_search(wgc).solution()
+    print(solution)
