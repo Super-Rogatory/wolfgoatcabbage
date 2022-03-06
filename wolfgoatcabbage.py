@@ -15,7 +15,7 @@ from search import *
 
 # YOUR CODE GOES HERE
 class WolfGoatCabbage(Problem):
-    def __init__(self, initial={"F", "W", "G", "C"}, goal=set()):
+    def __init__(self, initial={"F", "W", "G", "C"}, goal=frozenset()):
         # Similar to EightPuzzle, we can define the initial and goal states for our problem.
         super().__init__(initial, goal)
 
@@ -29,12 +29,17 @@ class WolfGoatCabbage(Problem):
             return {"F", "W", "C"}
 
     def actions(self, state):
+        # mirroring possible_actions list from eight_sliding_puzzle.
+        possible_actions = [{"F", "G"}, {"F"}, {"F", "C"}, {"F", "W"}]
         if state == {"F", "W", "G", "C"}:
-            return [{"F", "G"}]
+            possible_actions = [elem for elem in possible_actions if elem != {"F", "G"}]
         elif state == {"W", "C"}:
-            return [{"F", "G"}, {"F"}]
+            possible_actions = [
+                elem for elem in possible_actions if elem != {"F", "G"} or elem != {"F"}
+            ]
         elif state == {"F", "W", "C"}:
-            return [{"F", "C"}, {"F", "W"}, {"F"}]
+            possible_actions.remove({"F", "G"})
+        return possible_actions
 
 
 if __name__ == "__main__":
