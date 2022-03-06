@@ -29,11 +29,14 @@ class WolfGoatCabbage(Problem):
         if action == "F":
             new_result.add("F")
         elif action == {"F", "C"}:
-            return 0
+            new_result.add("F")
+            new_result.add("C")
         elif action == {"F", "G"}:
-            return 0
+            new_result.add("F")
+            new_result.add("G")
         elif action == {"F", "W"}:
-            return 0
+            new_result.add("F")
+            new_result.add("W")
 
         return frozenset(new_result)
 
