@@ -43,10 +43,10 @@ class WolfGoatCabbage(Problem):
             possible_actions = [{"F"}, {"F", "C"}, {"F", "W"}]
         elif state == {"W"} or state == {"G", "C", "F"}:
             # F,G to go forward, F,W to go backward
-            possible_actions = [{"F", "G"}, {"F", "W"}]
+            possible_actions = [{"F", "G"}, {"F", "C"}]
         elif state == {"C"} or state == {"G", "W", "F"}:
             # F,G to go forward, F,C to go backward
-            possible_actions = [{"F", "G"}, {"F", "C"}]
+            possible_actions = [{"F", "G"}, {"F", "W"}]
 
         return possible_actions
 
