@@ -32,13 +32,17 @@ class WolfGoatCabbage(Problem):
             new_result.add("F")
             new_result.add("C")
         elif action == {"F", "G"}:
-            new_result.add("F")
-            new_result.add("G")
+            if "F" in new_result:
+                new_result.remove("F")
+                new_result.remove("G")
+            else:
+                new_result.add("F")
+                new_result.add("G")
         elif action == {"F", "W"}:
             new_result.add("F")
             new_result.add("W")
 
-        return frozenset(new_result)
+        return new_result
 
     def actions(self, state):
         # mirroring possible_actions list from eight_sliding_puzzle. acknowledge bidrectional potential.
@@ -65,6 +69,7 @@ class WolfGoatCabbage(Problem):
 
 if __name__ == "__main__":
     wgc = WolfGoatCabbage()
+    print(wgc.result({"F", "W", "G", "C"}, {"F", "G"}))
     solution = depth_first_graph_search(wgc).solution()
     print(solution)
     solution = breadth_first_graph_search(wgc).solution()
