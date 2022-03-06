@@ -29,20 +29,22 @@ class WolfGoatCabbage(Problem):
             return {"F", "W", "C"}
 
     def actions(self, state):
-        # mirroring possible_actions list from eight_sliding_puzzle.
+        # mirroring possible_actions list from eight_sliding_puzzle. acknowledge bidrectional potential.
+        # include left and right hand states when possible.
         possible_actions = []
         if state == {"F", "W", "G", "C"}:
             # farmer goat is the only way to start (move must be correct)
             possible_actions = [{"F", "G"}]
-        elif state == {"W", "C"}:
+        elif state == {"W", "C"} or state == {"F", "G"}:
+            # if we are in state cw, we can move the farmer back or move the farmer and goat back. also present with fg.
             possible_actions = [{"F", "G"}, {"F"}]
-        elif state == {"F", "W", "C"}:
+        elif state == {"F", "W", "C"} or state == {"G"}:
             # can move farmer, farmer cabbage, farmer wolf.
             possible_actions = [{"F"}, {"F", "C"}, {"F", "W"}]
-        elif state == {"W"}:
+        elif state == {"W"} or state == {"G", "C", "F"}:
             # F,G to go forward, F,W to go backward
             possible_actions = [{"F", "G"}, {"F", "W"}]
-        elif state == {"C"}:
+        elif state == {"C"} or state == {"G", "W", "F"}:
             # F,G to go forward, F,C to go backward
             possible_actions = [{"F", "G"}, {"F", "C"}]
 
