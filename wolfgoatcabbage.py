@@ -32,10 +32,10 @@ class WolfGoatCabbage(Problem):
         # mirroring possible_actions list from eight_sliding_puzzle.
         possible_actions = [{"F", "G"}, {"F"}, {"F", "C"}, {"F", "W"}]
         if state == {"F", "W", "G", "C"}:
-            possible_actions = [elem for elem in possible_actions if elem != {"F", "G"}]
+            possible_actions = [elem for elem in possible_actions if elem == {"F", "G"}]
         elif state == {"W", "C"}:
             possible_actions = [
-                elem for elem in possible_actions if elem != {"F", "G"} or elem != {"F"}
+                elem for elem in possible_actions if elem == {"F", "G"} or elem == {"F"}
             ]
         elif state == {"F", "W", "C"}:
             possible_actions.remove({"F", "G"})
