@@ -27,10 +27,19 @@ class WolfGoatCabbage(Problem):
         # TODO: fix result function.
         # possible_actions = [{"F"}, {"F", "C"}, {"F", "G"}, {"F", "W"}]
         if action == "F":
-            new_result.add("F")
+            if "F" in new_result:
+                new_result.remove("F")
+            else:
+                new_result.add("F")
+
         elif action == {"F", "C"}:
-            new_result.add("F")
-            new_result.add("C")
+            if "F" in new_result:
+                new_result.remove("F")
+                new_result.remove("G")
+            else:
+                new_result.add("F")
+                new_result.add("C")
+
         elif action == {"F", "G"}:
             if "F" in new_result:
                 new_result.remove("F")
@@ -38,11 +47,15 @@ class WolfGoatCabbage(Problem):
             else:
                 new_result.add("F")
                 new_result.add("G")
+
         elif action == {"F", "W"}:
+            if "F" in new_result:
+                new_result.remove("F")
+                new_result.remove("W")
             new_result.add("F")
             new_result.add("W")
 
-        return new_result
+        return frozenset(new_result)  # unhashable type error if result is not frozen
 
     def actions(self, state):
         # mirroring possible_actions list from eight_sliding_puzzle. acknowledge bidrectional potential.
@@ -69,7 +82,7 @@ class WolfGoatCabbage(Problem):
 
 if __name__ == "__main__":
     wgc = WolfGoatCabbage()
-    print(wgc.result({"F", "W", "G", "C"}, {"F", "G"}))
+    print(wgc.result({"W"}, {"F", "C"}))
     solution = depth_first_graph_search(wgc).solution()
     print(solution)
     solution = breadth_first_graph_search(wgc).solution()
